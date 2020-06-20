@@ -1,0 +1,28 @@
+{
+  "name": "githook",
+  "version": "1.0.0",
+  "description": "## Project to show the most interesting GitHub pages for project ideas",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mariusandrian/githook.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mariusandrian/githook/issues"
+  },
+  "homepage": "https://github.com/mariusandrian/githook#readme",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "ejs": "^3.1.3",
+    "express": "^4.17.1",
+    "jest": "^26.0.1",
+    "method-override": "^3.0.0",
+    "mongodb": "^3.5.9"
+  }
+}
