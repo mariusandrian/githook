@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "nodemon server.js",
-    "reseed": "mongoimport --jsonArray --db githook --collection starred --drop --file ./db/seed/jsMostStarred.json"
+    "reseed": "mongoimport --jsonArray --db githook --collection starred --drop --file ./db/seed/jsMostStarred.json",
+    "reseed-notes": "mongoimport --jsonArray --db githook --collection notes --drop --file ./db/seed/notes.json"
   },
   "repository": {
     "type": "git",

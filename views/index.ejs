@@ -3,7 +3,6 @@
 
 <head>
   <%- include('./partials/head.ejs') %>
-  <title>Welcome</title>
 </head>
 
 <body>
@@ -11,6 +10,7 @@
     <% if (currentUser) { %>
     <nav class="navbar navbar-dark bg-dark">
       <a class="navbar-brand" href="#">Githook</a>
+      <span class="navbar-text">Logged in as <%= currentUser.username %></span>
       <form action="/sessions?_method=DELETE" method="post">
         <input type="submit" class="btn btn-outline-secondary" value="Logout" class="waves-effect waves-light btn">
       </form>
@@ -18,13 +18,16 @@
     <div id="modal">
       <div id="modal-textbox">
         <h5>Edit</h5>
-        <textarea class="form-control" rows="5" id="text-area"></textarea>
+        <form class="note-form" method="POST">
+        <textarea name="content" class="form-control" rows="5" id="text-area"></textarea>
+        
         <br />
-        <button type="button" class="btn btn-success">Save</button>
+        <div style="min-height: 20px" id="modal-id" name="_id"></div>
+        <input type="submit" class="btn btn-success" value="Save">
+        </form>
         <button type="button" class="btn btn-light" id="close" href="#">Close</button>
       </div>
     </div>
-    <h1>Welcome <%= currentUser.username %>!</h1>
     <div class="row">
       <div class="col-md-8" id="left-column">
         <% for(let i = 0; i < data.length; i++) { %>
@@ -48,30 +51,25 @@
         <% } %>
       </div>
       <div class="col-md-4" id="right-column">
-        <div class="card bg-light mb-3" style="max-width: 18rem;" id="first-note">
-          <div class="card-body">
-            <p class="card-text">Jot down your ideas here!</p>
-              <button type="button" class="close" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            <button type="button" class="btn btn-info edit">Edit</button>
-          </div>
-        </div>
+        <% if (notes.length > 0) { %>
+          <% for(let j = 0; j < notes.length; j++) { %>
+            <div class="card bg-light mb-3" style="max-width: 18rem;">
+              <div class="card-body">
+                <p class="card-text"><%= notes[j].content %></p>
+                <p hidden id="note-id"><%= notes[j]._id %></p>
+                  <button type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                <button type="button" class="btn btn-info edit">Edit</button>
+              </div>
+            </div>
+          <% } %>
+        <% } %>
         <div class="card" id="new-card">
           <button type="button" id="new" class="btn btn-outline-primary">Add Note</button>
         </div>
       </div>
     </div>
-    <h2>
-      <a class="btn" href="/app">Join the party!</a>
-    </h2>
-    <h2>
-      <a class="waves-effect waves-light btn" href="/shop/products">See My Shop!</a>
-    </h2>
-    </h1>
-    <form action="/sessions?_method=DELETE" method="post">
-      <input type="submit" name="" value="Logout" class="waves-effect waves-light btn">
-    </form>
     <% } else { %>
     <nav class="navbar navbar-dark bg-dark">
       <a class="navbar-brand" href="#">Githook</a>

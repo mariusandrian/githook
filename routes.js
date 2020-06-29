@@ -43,5 +43,5 @@ module.exports = app => {
     // app.get('/shop/edit', shopController.edit);
 
     // update route
-    // app.put('/shop/products/:name', shopController.update);
+    app.put('/notes/:id', appController.update);
 };

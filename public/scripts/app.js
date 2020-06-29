@@ -7,8 +7,10 @@ $(() => {
     //Event Handlers
     const openModal = () => {
         $modal.css('display', 'block');
-        console.log($(event.target).siblings(".card-text").text());
+        // console.log($(event.target).siblings(".card-text").text());
         $('textarea#text-area').val($(event.target).siblings(".card-text").text());
+        // console.log($(event.target).siblings("#note-id").text())
+        $('.note-form').attr("action","/notes/" + $(event.target).siblings("#note-id").text() + "?_method=PUT");
     }
     
     const closeModal = () => {
@@ -25,7 +27,7 @@ $(() => {
 
     $('.close').on("click",event => {
         console.log($(event.target).parent().parent().parent().parent());
-        $(event.target).parent().parent().parent().parent().remove();
+        $(event.target).parent().parent().parent().remove();
     });
     
     $('#new').click(event => {
@@ -44,7 +46,7 @@ $(() => {
 
         $('.close').on("click",event => {
             console.log($(event.target).parent().parent().parent().parent());
-            $(event.target).parent().parent().parent().parent().remove();
+            $(event.target).parent().parent().parent().remove();
         });
 
         //Grabbing Elements

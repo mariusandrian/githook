@@ -1,17 +1,20 @@
 const db = require('../db');
 const { assert } = require('chai');
+const { ObjectId } = require('mongodb');
 
 module.exports = {
-    async getAll () {
+    async getAll (name) {
         try {
-            const starred =  await db.starred.find({},{
+            const notes =  await db.notes.find({
+                username: name
+            }
+            ,{
                 projection: {
                     username: 1,
                     content: 1,
-                    _id: 0
                 }
-            }).sort({stargazers_count: -1}).toArray();
-            return starred;
+            }).sort({note_id: 1}).toArray();
+            return notes;
         } catch (err) {
             throw new Error(`Database Error - ${err.message}`);
         }
@@ -21,15 +24,15 @@ module.exports = {
     //     if (!item) throw new Error('Non-existance');
     //     return item;
     // },
-    // async create (item) {
-    //     try {
-    //         const { insertedCount } = await db.shop.insertOne(item);
-    //         if (!insertedCount) throw new Error('insertion failure');
-    //         return true;
-    //     } catch (err) {
-    //         throw new Error(`Due to ${err.message}, you are not allowed to insert this item ${JSON.stringify(item)}`);
-    //     }
-    // },
+    async create (item) {
+        try {
+            const { insertedCount } = await db.notes.insertOne(item);
+            if (!insertedCount) throw new Error('insertion failure');
+            return true;
+        } catch (err) {
+            throw new Error(`Due to ${err.message}, you are not allowed to insert this item ${JSON.stringify(item)}`);
+        }
+    },
     // async getOneByName (name) {
     //     const foundItem = await db.shop.findOne(
     //         {
@@ -42,20 +45,19 @@ module.exports = {
     //     if (!foundItem) throw new Error(`Item with name '${name}' does not exist`);
     //     return foundItem;
     // },
-    // async updateByName (name, item) {
-    //     try {
-    //         const { matchedCount } = await db.shop.updateOne({
-    //             name: {
-    //                 '$regex': `^${name}$`,
-    //                 '$options': 'i'
-    //             }
-    //         }, {
-    //             $set: item
-    //         });
-    //         if (!matchedCount) throw new Error(`${name} doesn't exist`);
-    //         return true;
-    //     } catch (err) {
-    //         throw new Error(`Due to ${err.message}, I cannot update it with ${JSON.stringify(item)}`);
-    //     }
-    // }
+    async updateById (id, item) {
+        try {
+            console.log(id);
+            let o_id = new ObjectId(id);
+            const { matchedCount } = await db.notes.updateOne({
+                "_id": o_id
+            }, {
+                $set: item
+            });
+            if (!matchedCount) throw new Error(`${username} doesn't exist`);
+            return true;
+        } catch (err) {
+            throw new Error(`Due to ${err.message}, I cannot update it with ${JSON.stringify(item)}`);
+        }
+    }
 };
