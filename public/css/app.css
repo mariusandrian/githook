@@ -1,0 +1,57 @@
+.col {
+    margin: auto;
+    top: 100px;
+    width: 300px;
+}
+
+.col > h2 {
+    text-align: center;
+}
+
+.card {
+    margin-bottom: 15px;
+}
+
+.card-image {
+    width: 100px;
+    border-radius: 50%;
+}
+
+.card-body-container {
+    display: flex;
+    padding: 15px;
+}
+
+.card-text-column {
+    width: 85%;
+}
+
+.stars-forks {
+    padding: 0 0 15px 15px;;
+}
+
+.note {
+    min-height: 340px;
+}
+
+#modal {
+	background-color: rgba(0,0,0,0.4);
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 1;
+    overflow: auto;
+    display: none;
+}
+
+#modal-textbox {
+    padding: 15px;
+	background-color: white;
+	height: 350px;
+	width: 550px;
+	border-radius: 2px;
+	margin: 150px auto;
+	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}

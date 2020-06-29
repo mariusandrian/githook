@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <%- include('./partials/head.ejs') %>
+  <title>Welcome</title>
+</head>
+
+<body>
+  <div class="container">
+    <% if (currentUser) { %>
+    <nav class="navbar navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Githook</a>
+      <form action="/sessions?_method=DELETE" method="post">
+        <input type="submit" class="btn btn-outline-secondary" value="Logout" class="waves-effect waves-light btn">
+      </form>
+    </nav>
+    <div id="modal">
+      <div id="modal-textbox">
+        <h5>Edit</h5>
+        <textarea class="form-control" rows="5" id="text-area"></textarea>
+        <br />
+        <button type="button" class="btn btn-success">Save</button>
+        <button type="button" class="btn btn-light" id="close" href="#">Close</button>
+      </div>
+    </div>
+    <h1>Welcome <%= currentUser.username %>!</h1>
+    <div class="row">
+      <div class="col-md-8" id="left-column">
+        <% for(let i = 0; i < data.length; i++) { %>
+        <div class="card">
+          <div class="card-body-container">
+            <div class="card-text-column">
+              <a href="<%= data[i].html_url %>">
+                <h5 class="card-title"><%= data[i].name %></h5>
+              </a>
+              <h6 class="card-subtitle mb-2 text-muted"><%= data[i].description %></h6>
+              <br>
+            </div>
+            <div class="card-image-column">
+              <img class="card-image" src="<%= data[i].owner.avatar_url %>">
+            </div>
+          </div>
+          <div class="stars-forks">
+            <p class="card-text">Stars = <%= data[i].stargazers_count %></p>
+          </div>
+        </div>
+        <% } %>
+      </div>
+      <div class="col-md-4" id="right-column">
+        <div class="card bg-light mb-3" style="max-width: 18rem;" id="first-note">
+          <div class="card-body">
+            <p class="card-text">Jot down your ideas here!</p>
+              <button type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            <button type="button" class="btn btn-info edit">Edit</button>
+          </div>
+        </div>
+        <div class="card" id="new-card">
+          <button type="button" id="new" class="btn btn-outline-primary">Add Note</button>
+        </div>
+      </div>
+    </div>
+    <h2>
+      <a class="btn" href="/app">Join the party!</a>
+    </h2>
+    <h2>
+      <a class="waves-effect waves-light btn" href="/shop/products">See My Shop!</a>
+    </h2>
+    </h1>
+    <form action="/sessions?_method=DELETE" method="post">
+      <input type="submit" name="" value="Logout" class="waves-effect waves-light btn">
+    </form>
+    <% } else { %>
+    <nav class="navbar navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Githook</a>
+      <form class="form-inline">
+        <a href="/sessions/new"><button class="btn btn-outline-secondary" type="button">Login</button></a>
+      </form>
+    </nav>
+    <br />
+    <main class="text-center">
+      <h2>Need new ideas for your next CS project?</h2>
+      <p class="lead">Find the latest trending repos on GitHub and save your ideas side-by-side.</p>
+      <a href="/users/new"><button class="btn btn-success" type="button">Sign Up</button></a>
+      </p>
+    </main>
+    <% } %>
+  </div>
+</body>
+
+</html>
