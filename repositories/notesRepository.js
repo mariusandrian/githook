@@ -19,11 +19,6 @@ module.exports = {
             throw new Error(`Database Error - ${err.message}`);
         }
     },
-    // async show (name) {
-    //     const item = await db.shop.findOne({ name: { '$regex': `^${name}$`, '$options': 'i' } });
-    //     if (!item) throw new Error('Non-existance');
-    //     return item;
-    // },
     async create (item) {
         try {
             const { insertedCount } = await db.notes.insertOne(item);
@@ -33,18 +28,6 @@ module.exports = {
             throw new Error(`Due to ${err.message}, you are not allowed to insert this item ${JSON.stringify(item)}`);
         }
     },
-    // async getOneByName (name) {
-    //     const foundItem = await db.shop.findOne(
-    //         {
-    //             name: {
-    //                 '$regex': `^${name}$`,
-    //                 '$options': 'i'
-    //             }
-    //         }
-    //     );
-    //     if (!foundItem) throw new Error(`Item with name '${name}' does not exist`);
-    //     return foundItem;
-    // },
     async updateById (id, item) {
         try {
             console.log(id);

@@ -69,9 +69,5 @@ $(() => {
         $closeBtn.on('click', closeModal);
        
     });
-
-    
-
-    
 });
 
