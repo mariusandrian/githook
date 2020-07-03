@@ -26,7 +26,6 @@ module.exports = {
                 content: "New Note"
             });
             // if (!insertedCount) throw new Error('insertion failure');
-            console.log("Create New Note repository result = " + result);
             return true;
         } catch (err) {
             throw new Error(`Due to ${err.message}, you are not allowed to insert this item ${JSON.stringify(item)}`);
@@ -34,7 +33,6 @@ module.exports = {
     },
     async updateById (id, item) {
         try {
-            console.log(id);
             let o_id = new ObjectId(id);
             const { matchedCount } = await db.notes.updateOne({
                 "_id": o_id
@@ -45,6 +43,18 @@ module.exports = {
             return true;
         } catch (err) {
             throw new Error(`Due to ${err.message}, I cannot update it with ${JSON.stringify(item)}`);
+        }
+    },
+    async deleteOne (id) {
+        try {
+            let o_id = new ObjectId(id);
+            const { deletedCount } = await db.notes.deleteOne({
+                "_id": o_id
+            });
+            if (!deletedCount) throw new Error(`Note doesn't exist in db`);
+            return true;
+        } catch (err) {
+            throw new Error(`Due to ${err.message}, I cannot remove ${JSON.stringify(item)}`);
         }
     }
 };

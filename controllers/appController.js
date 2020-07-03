@@ -10,7 +10,6 @@ module.exports = {
         if(req.session.currentUser !== undefined) {
             notes = await notesRepository.getAll(req.session.currentUser.username);
         }
-        // console.log(notes);
         res.render('index', { currentUser: req.session.currentUser, data: repos, notes: notes});
     },
     async update (req, res) {
@@ -18,7 +17,6 @@ module.exports = {
             const item = {
                 'content': req.body.content,
             };
-            // console.log(req.body.content);
             await notesRepository.updateById(req.params.id, item);
             res.redirect('/');
         } catch (err) {
@@ -28,7 +26,14 @@ module.exports = {
     async create (req, res) {
         try {
             const result = await notesRepository.createNew(req.session.currentUser.username);
-            console.log('Controller create result = ' + result);
+            res.redirect('/');
+        } catch (err) {
+            return res.render('errors/404', { err });
+        }
+    },
+    async delete (req, res) {
+        try {
+            const result = await notesRepository.deleteOne(req.params.id);
             res.redirect('/');
         } catch (err) {
             return res.render('errors/404', { err });

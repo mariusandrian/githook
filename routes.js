@@ -12,6 +12,7 @@ module.exports = app => {
     app.post('/users', usersController.create);
 
     app.post('/notes', appController.create);
+    app.delete('/notes/:id', appController.delete);
     // app.get('/app', appController.app);
     app.delete('/sessions', sessionsController.destroy);
 

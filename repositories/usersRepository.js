@@ -17,7 +17,6 @@ module.exports = {
         const userReq = await db.users.findOne({username: username});
         // If user is undefined or null, throw errer
         if (!userReq) throw new Error (`The user ${username} is not registered`);
-        // console.log(userReq);
         return userReq;
     }
 }

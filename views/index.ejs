@@ -57,9 +57,14 @@
               <div class="card-body">
                 <p class="card-text"><%= notes[j].content %></p>
                 <p hidden id="note-id"><%= notes[j]._id %></p>
-                  <button type="button" class="close" aria-label="Close">
+                <form method="POST" action="/notes/<%= notes[j]._id %>?_method=DELETE">
+                  <button type="submit" class="close" aria-label="Close" id="delete-note">
                     <span aria-hidden="true">&times;</span>
                   </button>
+                </form>
+                  <!-- <button type="button" class="close" aria-label="Close" id="delete-note">
+                    <span aria-hidden="true">&times;</span>
+                  </button> -->
                 <button type="button" class="btn btn-info edit">Edit</button>
               </div>
             </div>
