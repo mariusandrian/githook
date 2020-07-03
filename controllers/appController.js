@@ -25,6 +25,15 @@ module.exports = {
             return res.render('errors/404', { err });
         }  
     },
+    async create (req, res) {
+        try {
+            const result = await notesRepository.createNew(req.session.currentUser.username);
+            console.log('Controller create result = ' + result);
+            res.redirect('/');
+        } catch (err) {
+            return res.render('errors/404', { err });
+        }
+    },
     app (req, res) {
         if(req.session.currentUser) {
             res.render('app/index');

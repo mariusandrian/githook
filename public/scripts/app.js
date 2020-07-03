@@ -22,8 +22,19 @@ $(() => {
     
     $closeBtn.on('click', closeModal);
 
-    //Get text area default value
-    
+    // New Note button AJAX call
+    $('#new-note').on('click', event => {
+        $.post("/notes", () => {
+            console.log("clicked new notes");
+        })
+            .done(() => {
+                console.log("finished post request");
+                window.location.href = "/";
+            })
+            .fail(() => {
+                alert("unable to create new notes, please try again later.")
+            });
+    });  
 
     $('.close').on("click",event => {
         console.log($(event.target).parent().parent().parent().parent());

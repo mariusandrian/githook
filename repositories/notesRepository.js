@@ -19,10 +19,14 @@ module.exports = {
             throw new Error(`Database Error - ${err.message}`);
         }
     },
-    async create (item) {
+    async createNew (name) {
         try {
-            const { insertedCount } = await db.notes.insertOne(item);
-            if (!insertedCount) throw new Error('insertion failure');
+            const result = await db.notes.insertOne({
+                username: name,
+                content: "New Note"
+            });
+            // if (!insertedCount) throw new Error('insertion failure');
+            console.log("Create New Note repository result = " + result);
             return true;
         } catch (err) {
             throw new Error(`Due to ${err.message}, you are not allowed to insert this item ${JSON.stringify(item)}`);
