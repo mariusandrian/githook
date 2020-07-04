@@ -2,15 +2,6 @@
 
 Web app to show the most interesting GitHub pages for project ideas, with a notes functionality to remember any ideas that pop up
 
-## Table of Content
-- [Repository] [#Repository]
-- [Features] [#Features]
-- [Technology used] [#Technology-used]
-- [Accomplishments] [#Accomplishments]
-- [Difficulties] [#Difficulties]
-- [Future development] [#Future-development]
-
-
 ## Repository
 
 https://github.com/mariusandrian/githook
